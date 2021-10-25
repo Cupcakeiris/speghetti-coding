@@ -1,4 +1,4 @@
-<?php
+<?php 
 $dbName = 'library';
 //connect to the db
 $conn = new mysqli('localhost', 'root', '');
@@ -37,5 +37,27 @@ if (!$table) {
 
 
 
-$conn->close();
+
+
+//login
+$email = $_POST['email'];
+$pwd = $_POST['pwd'];
+$result = mysqli_query($conn, "SELECT * FROM student WHERE email='$email' AND pwd = '$pwd'"); //checks if row/account with input datas exist
+
+if (!$result)
+    {
+        die('Error: ' . mysqli_error($conn));
+    }
+
+if (isset($_POST["login"])){
+    if(mysqli_num_rows($result) > 0){
+            echo 'Loginned successfully';
+        } else{ 
+            echo 'No account was found'; 
+            
+        }
+}
+
+    $conn->close();
+
 ?>
