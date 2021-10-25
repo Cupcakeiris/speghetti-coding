@@ -1,0 +1,10 @@
+.container{
+    margin-left: 20px;
+    width: 520px;
+}
+input[type='text']{
+    width: 500px;
+    padding: 10px;
+    outline: none;
+    border: none;
+}
