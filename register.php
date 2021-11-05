@@ -1,79 +1,33 @@
-<?php 
-$dbName = 'library';
-//connect to the db
-$conn = new mysqli('localhost', 'root', '');
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-  }
+<!DOCTYPE html>
+<html>
+    <head>
+        
+        <title>Register</title>
+        <link rel="stylesheet" href="index.css">
+        <link rel="stylesheet" href="login.css">
+        <script src="db.php"></script>
 
-//make it as the current db
-if (!mysqli_select_db($conn,$dbName)){
-    $sql = "CREATE DATABASE ".$dbName;
-    if ($conn->query($sql) === TRUE) {
-        echo "Database created successfully";
-    }else {
-        echo "Error creating database: " . $conn->error;
-    }
-} 
+    </head>
+    <body>
 
-//tables
-$sql = "CREATE TABLE student(
-    id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    fname VARCHAR(30),
-    lname VARCHAR(30),
-    email VARCHAR(50),
-    pwd VARCHAR(30)
-    )";
+            <form action="reg.php" method="post">
+            <div class="container">
+                <h1>Register</h1>
+                <p>Name</p>
+                <input type="text" placeholder="Enter your name" name="fname" id="fname" required><br>
+                <p>Surname</p>
+                <input type="text" placeholder="Enter your surname" name="lname" id="lname" required><br>
+                <p>Email</p>
+                <input type="text" placeholder="Enter your email" name="email" id="email" required><br>
+                <p>Password</p>
+                <input type="text" placeholder="Enter your password" minlength="6" name="pwd" id="pwd" required><br>
+                <p>Confirm password</p>
+                <input type="text" placeholder="Enter your password" minlength="6" name="confpwd" id="confpwd" required><br>
 
-$table = 'student';
+                <button style="float: right;" type="submit" name="register">Submit</button><br><br>
+                <a href="login.html">Already have an account? Login</a>
+            </div>
 
-if (!$table) {
-    if ($conn->query($sql) === TRUE) {
-    echo "Table created successfully";
-    } else {
-    echo "Error creating table: " . $conn->error;
-    }
-}
-
-
-
-
-
-//register
-$fname = $_POST['fname'];
-$lname  = $_POST['lname'];
-$email = $_POST['email'];
-$pwd = $_POST['pwd'];
-$confpwd = $_POST['confpwd'];
-
-$pass = 0;
-
-if ($_POST['pwd']!= $_POST['confpwd'])
-{
-     echo 'Password does not match';
-}
-else{
-$pass += 1; //if all requirements are satisfied user can pass registration
-}
-
-if (!filter_var($email, FILTER_VALIDATE_EMAIL)){ //checks email format
-    echo 'Invalid email format';
-}
-else{
-    $pass += 1;
-}
-
-
-if(isset($_POST["register"]) && $pass == 2){//checks if the button with name "register" is pressed
-    $sql = "INSERT INTO student(fname, lname, email, pwd)
-    VALUES ('$fname', '$lname', '$email', '$pwd')";
-    if ($conn->query($sql) === TRUE) {
-        echo "Row created successfully";
-        } else {
-        echo "Error: " . $conn->error;
-        }
-    
-}
-
-$conn->close();
-?>
+        </form>
+    </body>
+</html>

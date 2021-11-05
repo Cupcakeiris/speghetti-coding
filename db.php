@@ -1,4 +1,7 @@
 <?php
+
+
+
 $dbName = 'library';
 //connect to the db
 $conn = new mysqli('localhost', 'root', '');
@@ -37,5 +40,4 @@ if (!$table) {
 
 
 
-$conn->close();
 ?>
