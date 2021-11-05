@@ -16,16 +16,24 @@ include('log.php');
         <img id='library' src="res/library.jpg">
         <div class="top-text">
           <h1>Welcome to NIS Library</h1>
-          <a href="#">Home</a>
-          <a href="test.php">Books</a>
+          <a href="index.php">Home</a>
           <a href="#">Contacts</a>
           
           <?php
-            if(isset($_SESSION['user'])){
-              echo '<a href="logout.php">'.$_SESSION['user'].'</a>';
-          }else{
-            echo '<a href="login.php">'.'Profile'.'</a>';
+            if(isset($_SESSION['user'])){  //if user is authorized it shows first name
+                echo '<a href="book.php">Books</a>';
+                echo '<a href="logout.php">'.$_SESSION['user'].'</a>';
+                if($_SESSION['user'] == 'AdminV'){
+                  echo '<a style="margin-left: 20px;" href="crud.php">Manage Books</a>';
+                }
+              
           }
+          else{
+            echo '<a href="login.php">Books</a>';
+            echo '<a href="login.php">'.'Profile'.'</a>'; //by deafult shows Profile and sends user to the login page
+            
+          }
+
           ?>  
         </div>
       </div>
