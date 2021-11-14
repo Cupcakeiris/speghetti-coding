@@ -67,4 +67,23 @@ if(empty($result)) {
     $result = mysqli_query($conn, $query);
 }
 
+$query = "SELECT * FROM reserve";
+$result = mysqli_query($conn, $query);
+
+if(empty($result)) {
+    $query = "CREATE TABLE reserve(
+        id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+        code VARCHAR(50),
+        email VARCHAR(30)
+        )";
+    
+    if (mysqli_query($conn, $query)) {
+            echo "Table created successfully";
+          } else {
+            echo "Error creating table: " . $conn->error;
+          }
+
+    $result = mysqli_query($conn, $query);
+}
+
 ?>

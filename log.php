@@ -23,7 +23,8 @@ if (isset($_POST["login"])){ //searches for the input account
             echo 'Loginned successfully';
             $temp = mysqli_query($conn, "SELECT fname FROM student WHERE email='$email'");
             while ($row = $temp->fetch_assoc()) {
-                $_SESSION['user'] = $row['fname'];
+                $_SESSION['user'] = $row['fname']; //session starts with user's name and email
+                $_SESSION['email'] = $email;
             }
             if(isset($_SESSION['user'])){ //adds to global session
                     echo '<p>Welcome '.$_SESSION['user'].'</p>';

@@ -25,7 +25,7 @@
                 <input type="text" placeholder="Enter your password" minlength="6" name="confpwd" id="confpwd" required><br>
 
                 <button style="float: right;" type="submit" name="register">Submit</button><br><br>
-                <a href="login.html">Already have an account? Login</a>
+                <a href="login.php">Already have an account? Login</a>
             </div>
 
         </form>

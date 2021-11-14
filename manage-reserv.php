@@ -4,6 +4,7 @@ include('log.php');
 ?>
 
 <!DOCTYPE html>
+<meta charset="utf-8" />
 <html>
   <head>
     <title>NIS Library</title>
@@ -96,39 +97,35 @@ include('log.php');
   <a class="active" style="margin: 0px" href="index.php">Home</a>
   <div class="search-container">
     <form action="book.php" method="post" name="search">
-      <input type="text" placeholder="Enter book name" name="search">
+      <input type="text" placeholder="Enter student email" name="search">
       <button type="submit">&#x1F50E;</button>
     </form>
   </div>
 </div>
 
 
-<form action="reserve.php" method="post">
+<form action="remind.php" method="post">
 <table class="book">
     <tr>   
-    <th>Title</th>
-    <th>Author</th>
-    <th>Year</th>
-    <th>Cover</th>
-    <th>Reserve</th>
+    <th>Code</th>
+    <th>Student email</th>
+    <th> </th>
     </tr> 
 
 
 <?php
-  $query = "SELECT * FROM book";
+  $query = "SELECT * FROM reserve";
   $result = mysqli_query($conn, $query);
 
   while($row = mysqli_fetch_array($result)) //shows all rows in table
   {
-    echo '<div class="book">';
+      $attribute = $row['email']; //you cannot access to name which has dot in it 
+      $attribute = str_replace(".", "", $attribute); //with this code line you can give accessable name for button
+      echo '<div class="book">';
       echo '<tr>';
-      echo '<td>'. $row['title'] . '</p> </td>';
-      echo '<td>' . $row['author'] . '</td>';
-      echo '<td>' . $row['publishedYear'] . '</td>';
-      echo '<td>' .
-      "<img src='".$row['imageLink']."' width = '100px'>"
-      . '</td>';
-      echo '<td> <button name='.$row['code'].'>Reserve</button></td>'; //when making reservation each button reserves corresponding book row
+      echo '<td>'. $row['code'] . '</p> </td>';
+      echo '<td>' . $row['email'] . '</td>';
+      echo '<td> <button name='.$attribute.'>Send reminder</button></td>'; //same principe as reserve book
       echo '</tr>';
     echo '</div>';
   }
@@ -136,7 +133,9 @@ include('log.php');
 
 
 </table>
+
 </form>
     </body>
   
 </html>
+

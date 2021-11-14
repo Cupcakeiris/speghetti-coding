@@ -24,7 +24,13 @@ include('log.php');
                 echo '<a href="book.php">Books</a>';
                 echo '<a href="logout.php">'.$_SESSION['user'].'</a>';
                 if($_SESSION['user'] == 'AdminV'){
+                  echo '<br><br>';
                   echo '<a style="margin-left: 20px;" href="crud.php">Manage Books</a>';
+                  echo '<br>';
+                  echo '<a style="margin-left: 20px;" href="manage-reserv.php">Manage Reminder</a>';
+                  echo '<br>';
+                  echo '<a style="margin-left: 20px;" href="crud-reserv.php">Manage Reservation</a>';
+                  
                 }
               
           }
