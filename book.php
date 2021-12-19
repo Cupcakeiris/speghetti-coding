@@ -10,6 +10,27 @@ include('log.php');
     <script src="db.php"></script>
     <link rel="stylesheet" href="index.css">
 
+<script>  //Searchbar
+function search() {
+  let input, table, tr, td, value;
+  input = document.getElementById("searchbar").value.toUpperCase();
+  table = document.getElementById("book");
+  tr = table.getElementsByTagName("tr");
+  for (let i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      value = td.textContent || td.innerText;
+      if (value.toUpperCase().indexOf(input) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }       
+  }
+}
+</script>
+
+
 <style>
 .book {
     border-collapse: collapse;
@@ -95,16 +116,13 @@ include('log.php');
 <div class="topnav">
   <a class="active" style="margin: 0px" href="index.php">Home</a>
   <div class="search-container">
-    <form action="book.php" method="post" name="search">
-      <input type="text" placeholder="Enter book name" name="search">
-      <button type="submit">&#x1F50E;</button>
-    </form>
+      <input type="text" placeholder="Enter book name" id="searchbar" onkeyup="search()">
   </div>
 </div>
 
 
 <form action="reserve.php" method="post">
-<table class="book">
+<table class="book" id="book">
     <tr>   
     <th>Title</th>
     <th>Author</th>
@@ -122,10 +140,10 @@ include('log.php');
   {
     echo '<div class="book">';
       echo '<tr>';
-      echo '<td>'. $row['title'] . '</p> </td>';
-      echo '<td>' . $row['author'] . '</td>';
-      echo '<td>' . $row['publishedYear'] . '</td>';
-      echo '<td>' .
+      echo '<td class="bookName">'. $row['title'] . '</p> </td>';
+      echo '<td class="bookAuthor">' . $row['author'] . '</td>';
+      echo '<td class="bookYear">' . $row['publishedYear'] . '</td>';
+      echo '<td class="bookImage">' .
       "<img src='".$row['imageLink']."' width = '100px'>"
       . '</td>';
       echo '<td> <button name='.$row['code'].'>Reserve</button></td>'; //when making reservation each button reserves corresponding book row
