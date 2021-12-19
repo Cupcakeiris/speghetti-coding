@@ -10,8 +10,8 @@ body{
 
 
 .container {
-    position: relative;
     color: green;
+    margin: 16px;
 }
   
 

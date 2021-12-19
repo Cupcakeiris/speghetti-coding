@@ -17,7 +17,7 @@ include('log.php');
         <div class="top-text">
           <h1>Welcome to NIS Library</h1>
           <a href="index.php">Home</a>
-          <a href="#">Contacts</a>
+          <a href="contact.php">Contacts</a>
           
           <?php
             if(isset($_SESSION['user'])){  //if user is authorized it shows first name
@@ -72,13 +72,7 @@ include('log.php');
         <br>
         </div>
         <br>
-        <h3>About NIS Library</h3>
-        <div style="overflow: auto;">
-          <p>This site can be used by NIS CBD Almaty's students to book a book for a planned day. After getting a book from the library
-            you can check deadline expiration and get notification about it. The site is very helpful to save time and easy to use. You can
-            suggest your ideas to our contacts. We hope you will enjoy using our digital library.
-          </p>
-      </div>
+        
 
     </body>
   </head>
