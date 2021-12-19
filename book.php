@@ -56,7 +56,7 @@ function search() {
 
 
 
-  * {box-sizing: border-box;}
+* {box-sizing: border-box;}
 
 .topnav {
   overflow: hidden;

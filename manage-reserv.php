@@ -11,6 +11,26 @@ include('log.php');
     <script src="db.php"></script>
     <link rel="stylesheet" href="index.css">
 
+    <script>  //Searchbar
+function search() {
+  let input, table, tr, td, value;
+  input = document.getElementById("searchbar").value.toUpperCase();
+  table = document.getElementById("email");
+  tr = table.getElementsByTagName("tr");
+  for (let i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      value = td.textContent || td.innerText;
+      if (value.toUpperCase().indexOf(input) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }       
+  }
+}
+</script>
+
 <style>
 .book {
     border-collapse: collapse;
@@ -96,19 +116,17 @@ include('log.php');
 <div class="topnav">
   <a class="active" style="margin: 0px" href="index.php">Home</a>
   <div class="search-container">
-    <form action="book.php" method="post" name="search">
-      <input type="text" placeholder="Enter student email" name="search">
-      <button type="submit">&#x1F50E;</button>
+      <input type="text" placeholder="Enter student email" name="search" id="searchbar" onkeyup="search()">
     </form>
   </div>
 </div>
 
 
 <form action="remind.php" method="post">
-<table class="book">
+<table class="book" id="email">
     <tr>   
-    <th>Code</th>
     <th>Student email</th>
+    <th>Code</th>
     <th> </th>
     </tr> 
 
@@ -120,12 +138,11 @@ include('log.php');
   while($row = mysqli_fetch_array($result)) //shows all rows in table
   {
       $attribute = $row['email']; //you cannot access to name which has dot in it 
-      $attribute = str_replace(".", "", $attribute); //with this code line you can give accessable name for button
       echo '<div class="book">';
       echo '<tr>';
-      echo '<td>'. $row['code'] . '</p> </td>';
       echo '<td>' . $row['email'] . '</td>';
-      echo '<td> <button name='.$attribute.'>Send reminder</button></td>'; //same principe as reserve book
+      echo '<td>'. $row['code'] . '</p> </td>';
+      echo '<td> <a href="mailto:'.$attribute.'?subject=Book deadline">Send reminder</a></td>'; //opens gmail tab to send message
       echo '</tr>';
     echo '</div>';
   }
